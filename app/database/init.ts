@@ -2,7 +2,7 @@ import mongoose, { Mongoose } from 'mongoose';
 import redis from 'ioredis';
 
 export const initMoongoDB = async () => {
-  const uri = process.env.MONGO_URI;
+  const uri = process.env?.MONGO_URI;
   if (uri) {
     const { connection } = await mongoose.connect(uri);
 
@@ -22,9 +22,9 @@ export const initMoongoDB = async () => {
 }
 
 export const initRedis = async () => {
-  const username = process.env.REDIS_USERNAME;
-  const password = process.env.REDIS_PASSWORD;
-  const host = process.env.REDIS_HOST;
+  const username = process.env?.REDIS_USERNAME;
+  const password = process.env?.REDIS_PASSWORD;
+  const host = process.env?.REDIS_HOST;
   const instance = new redis({
     username: username,
     password: password,
