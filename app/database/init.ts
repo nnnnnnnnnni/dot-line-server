@@ -21,25 +21,21 @@ export const initMoongoDB = async () => {
 }
 
 export const initRedis = async () => {
-  const username = process.env?.REDIS_USERNAME;
-  const password = process.env?.REDIS_PASSWORD;
-  const host = process.env?.REDIS_HOST;
-  const instance = new redis({
-    username: username,
-    password: password,
-    host: host,
-    db: 0,
-  });
+  const uri = process.env?.REDIS_URI;
 
-  instance.connect(() => {
-    console.log('redis connected')
-  });
+  if (uri) {
+    const instance = new redis(uri);
 
-  instance.monitor().then(function (monitor) {
-    monitor.on('monitor', function (time, args, source, database) {
-      console.log(`${time} : ${source} ${args} ${database}`);
+    instance.connect(() => {
+      console.log('redis connected')
     });
-  });
 
-  return instance;
+    instance.monitor().then(function (monitor) {
+      monitor.on('monitor', function (time, args, source, database) {
+        console.log(`${time} : ${source} ${args} ${database}`);
+      });
+    });
+    return instance;
+  }
+
 }
