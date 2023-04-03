@@ -4,8 +4,7 @@ import redis from 'ioredis';
 export const initMoongoDB = async () => {
   const uri = process.env?.MONGO_URI;
   if (uri) {
-    const { connection } = await mongoose.connect(uri);
-
+    const connection = await mongoose.createConnection(uri)
     connection.once('error', (err) => {
       console.log('MongoDB connection error. Please make sure MongoDB is running. ' + err);
       process.exit();

@@ -3,9 +3,11 @@ import koaStatic from 'koa-static';
 import dotEnv from 'dotenv';
 import path from 'path';
 import { initMoongoDB, initRedis } from './database';
-import { initRoutes } from './router';
-dotEnv.config();
 const pino = require('koa-pino-logger')()
+import { initRoutes } from './router';
+dotEnv.config({
+  path: path.resolve(__dirname, '../.env')
+});
 
 const app = new Koa<any, Context>();
 
@@ -13,7 +15,7 @@ const app = new Koa<any, Context>();
 app.use(koaStatic(path.resolve(__dirname, '../public')))
 
 // logger
-app.use(pino)
+// app.use(pino)
 
 // database
 initMoongoDB();

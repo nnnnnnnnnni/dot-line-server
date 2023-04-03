@@ -1,13 +1,15 @@
 import { Context } from "koa";
 import { IRouterOptions } from "koa-router";
 import { IRoute } from ".";
+import { signToAuth } from "../middlewares";
 
 export const userRoutes: IRoute[] = [
   {
     path: '/users',
     method: 'get',
     handler: async (ctx: Context) => {
-      ctx.body = 'Hello get';
+      const token = signToAuth({ id: 1, name: 'test' })
+      ctx.body = token;
     },
   },
   {

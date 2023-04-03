@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import { compact } from 'lodash';
-import { auth } from '../middlewares';
+import { authMiddleware } from '../middlewares';
 import { userRoutes } from './userRoutes';
 
 export const initRoutes = () => {
@@ -10,7 +10,7 @@ export const initRoutes = () => {
 
   routes.map(route => {
     const middlewares = compact([
-      route.needLogin ? auth : null,
+      route.needLogin ? authMiddleware : null,
       route.handler
     ]);
     if(route.method === 'get') {
