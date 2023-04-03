@@ -27,10 +27,6 @@ initRedis().then(instance => {
 const router = initRoutes();
 app.use(router.routes()).use(router.allowedMethods());
 
-app.use(async (ctx) => {
-  ctx.body = 'Hello World111';
-});
-
 app.listen(process.env.PORT || 4000, () => {
   console.log(`Server running on port ${process.env.PORT || 4000}`)
 })
