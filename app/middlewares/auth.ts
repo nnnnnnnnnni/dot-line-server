@@ -2,6 +2,7 @@ import { Middleware } from "koa";
 import { sign, verify } from 'jsonwebtoken';
 import dotEnv from 'dotenv';
 import path from 'path';
+import { Response } from "../utils/response";
 dotEnv.config({
   path: path.resolve(__dirname, '../.env')
 });
@@ -10,26 +11,20 @@ export const authMiddleware: Middleware = (ctx, next) => {
   const JWT_SECRET = process.env.JWT_SECRET || '';
 
   if (!JWT_SECRET) {
-    return next();
+    throw new Error('JWT_SECRET is not defined');
   }
   const authorizationInHeader = ctx.request.header.authorization || ctx.request.header.Authorization as string;
 
   if (authorizationInHeader) {
     verify(authorizationInHeader, JWT_SECRET, (err, decoded) => {
       if (err) {
-        ctx.status = 401;
-        return ctx.body = {
-          message: 'Unauthorized2'
-        }
+        return ctx.body = new Response(401, err.message, null)
       } else {
         return next();
       }
     })
   } else {
-    ctx.status = 401;
-    ctx.body = {
-      message: 'Unauthorized1'
-    }
+    return ctx.body = new Response(401, 'Unauthorized', null)
   }
 }
 
