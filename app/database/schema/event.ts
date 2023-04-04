@@ -69,6 +69,16 @@ const userSchema = new mongoose.Schema(
         type: String,
       },
     },
+    // 点赞数
+    like: {
+      type: Number,
+      default: 0,
+    },
+    // 关注数
+    follow: {
+      type: Number,
+      default: 0,
+    }
   },
   {
     timestamps: {
@@ -80,7 +90,8 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.index({ location: "2dsphere" });
-userSchema.index({ createAt: -1 })
-userSchema.index({ type: -1 })
+userSchema.index({ createAt: -1 });
+userSchema.index({ type: -1 });
+userSchema.index({ follow: -1 });
 
-export const userModel = mongoose.model("user", userSchema);
+export const eventModel = mongoose.model("user", userSchema);
