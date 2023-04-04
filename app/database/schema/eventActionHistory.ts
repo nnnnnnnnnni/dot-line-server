@@ -34,4 +34,4 @@ const eventActionHistory = new mongoose.Schema(
 
 eventActionHistory.index({ event: 1, createdAt: -1 });
 
-export const eventActionHistoryModel = mongoose.model("user", eventActionHistory);
+export const eventActionHistoryModel = mongoose.model("eventActionHistory", eventActionHistory);

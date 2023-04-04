@@ -1,6 +1,6 @@
 import { Middleware } from "koa";
 import { sign, verify } from 'jsonwebtoken';
-import { Response } from "../utils/response";
+import { Response } from "@utils/response";
 
 export const authMiddleware: Middleware = (ctx, next) => {
   const JWT_SECRET = process.env.JWT_SECRET || '';

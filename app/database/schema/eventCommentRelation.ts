@@ -42,4 +42,4 @@ eventCommentRelation.index({ createdAt: -1 });
 eventCommentRelation.index({ creator: 1 });
 eventCommentRelation.index({ quote: 1 });
 
-export const eventCommentRelationModel = mongoose.model("user", eventCommentRelation);
+export const eventCommentRelationModel = mongoose.model("eventCommentRelation", eventCommentRelation);

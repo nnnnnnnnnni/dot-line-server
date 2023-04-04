@@ -2,25 +2,28 @@ import Koa, { Context } from 'koa';
 import koaStatic from 'koa-static';
 import dotEnv from 'dotenv';
 import path from 'path';
-import { initMoongoDB, initRedis } from './database';
 import { initRoutes } from './router';
 import { errorHandle } from './middlewares/errorHandle';
+import { Redis } from 'ioredis';
+import { initMoongoDB, initRedis } from '@db/init';
 dotEnv.config({ path: path.resolve(__dirname, '../.env') });
-const pino = require('koa-pino-logger')()
+
+let redisClient: Redis | undefined;
 
 const app = new Koa<any, Context>();
 
-// static files
+// 静态文件
 app.use(koaStatic(path.resolve(__dirname, '../public')))
 
 // logger
-// app.use(pino)
+// app.use(require('koa-pino-logger')())
 
 // database
 initMoongoDB();
 initRedis().then(instance => {
   if (instance) {
     app.context.redis = instance;
+    redisClient = instance
   }
 })
 
@@ -34,3 +37,5 @@ app.use(router.routes()).use(router.allowedMethods());
 app.listen(process.env.PORT || 4000, () => {
   console.log(`Server running on port ${process.env.PORT || 4000}`)
 })
+
+export { redisClient };

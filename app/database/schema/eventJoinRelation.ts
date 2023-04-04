@@ -34,4 +34,4 @@ const eventJoinRelation = new mongoose.Schema(
 
 eventJoinRelation.index({ user: 1, event: 1, type: 1 }, { unique: true });
 
-export const eventJoinRelationModel = mongoose.model("user", eventJoinRelation);
+export const eventJoinRelationModel = mongoose.model("eventJoinRelation", eventJoinRelation);

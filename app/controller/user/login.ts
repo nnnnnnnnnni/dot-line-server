@@ -1,13 +1,8 @@
+import { redisGet, redisSet } from "@db/common/redis";
 import { Context } from "koa";
 
 export const login = async (ctx: Context) => {
-  const rpo = new Promise((res, rej) => {
-    setTimeout(() => {
-      rej(10)
-    }, 1000)
-  })
+  const vl = await redisSet('test', 'name', { db: 1 });
 
-  await rpo
-
-  return ctx.body = 'Hello get';
+  return ctx.body = 'Hello get' + vl;
 }

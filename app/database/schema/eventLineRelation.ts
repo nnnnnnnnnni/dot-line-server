@@ -44,4 +44,4 @@ eventLineRelation.index({ event: 1, related: 1, order: 1 }, { unique: true })
 eventLineRelation.index({ event: 1, order: 1 })
 eventLineRelation.index({ related: 1, order: 1 })
 
-export const eventLineRelationModel = mongoose.model("user", eventLineRelation);
+export const eventLineRelationModel = mongoose.model("eventLineRelation", eventLineRelation);

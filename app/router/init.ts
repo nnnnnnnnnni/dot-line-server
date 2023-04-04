@@ -3,7 +3,6 @@ import Router from 'koa-router';
 import { compact, flatten } from 'lodash';
 import { IRoute } from '.';
 import { authMiddleware } from '../middlewares';
-import { errorHandle } from '../middlewares/errorHandle';
 import { userV1Routes } from './userRoutes';
 
 export const initRoutes = () => {

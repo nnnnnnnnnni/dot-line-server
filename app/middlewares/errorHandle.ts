@@ -1,5 +1,5 @@
+import { Response } from "@utils/response";
 import { Context, Next } from "koa";
-import { Response } from "../utils/response";
 
 export const errorHandle = async (ctx: Context, next: Next) => {
   try {
