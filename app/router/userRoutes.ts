@@ -1,5 +1,6 @@
 import { Context } from "koa";
 import { IRoutes } from ".";
+import { userModel } from "../database/schemas/user";
 import { signToAuth } from "../middlewares";
 
 export const userV1Routes: IRoutes = {
@@ -10,7 +11,7 @@ export const userV1Routes: IRoutes = {
       method: 'get',
       handler: async (ctx: Context) => {
         const token = signToAuth({ id: 1, name: 'test' })
-        ctx.body = token;
+        ctx.body = token
       },
     },
     {

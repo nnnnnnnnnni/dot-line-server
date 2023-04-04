@@ -4,17 +4,14 @@ import redis from 'ioredis';
 export const initMoongoDB = async () => {
   const uri = process.env?.MONGO_URI;
   if (uri) {
-    const connection = await mongoose.createConnection(uri)
-    connection.once('error', (err) => {
-      console.log('MongoDB connection error. Please make sure MongoDB is running. ' + err);
-      process.exit();
-    });
-    connection.once("open", () => {
-      console.log("MongoDB database connection established successfully");
-    });
-    connection.on("disconnected", () => {
-      console.log("MongoDB database connection disconnected");
-    });
+    try {
+      mongoose.connect(uri).then(() => {
+        console.log('mongo connected')
+      })
+    } catch (error) {
+      console.log(error)
+      process.exit(-1)
+    }
   } else {
     throw 'auth error, please check your .env file'
   }
@@ -37,5 +34,7 @@ export const initRedis = async () => {
     });
     return instance;
   }
+
+  return;
 
 }

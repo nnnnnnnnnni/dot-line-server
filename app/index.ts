@@ -20,7 +20,8 @@ app.use(koaStatic(path.resolve(__dirname, '../public')))
 // database
 initMoongoDB();
 initRedis().then(instance => {
-  app.context.redis = instance;
+  if (instance)
+    app.context.redis = instance;
 })
 
 // router
