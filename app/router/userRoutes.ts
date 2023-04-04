@@ -1,7 +1,7 @@
 import { Context } from "koa";
 import { IRoutes } from ".";
 import { login } from "../controller/user/login";
-import { userModel } from "../database/schemas/user";
+import { userModel } from "../database/schema/user";
 import { signToAuth } from "../middlewares";
 
 export const userV1Routes: IRoutes = {
