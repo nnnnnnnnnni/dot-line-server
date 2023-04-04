@@ -1,11 +1,6 @@
 import { Middleware } from "koa";
 import { sign, verify } from 'jsonwebtoken';
-import dotEnv from 'dotenv';
-import path from 'path';
 import { Response } from "../utils/response";
-dotEnv.config({
-  path: path.resolve(__dirname, '../.env')
-});
 
 export const authMiddleware: Middleware = (ctx, next) => {
   const JWT_SECRET = process.env.JWT_SECRET || '';

@@ -4,13 +4,16 @@ const userSchema = new mongoose.Schema(
     // 活动名称
     name: {
       type: String,
-      require: true
     },
     // 活动类型
     type: {
       type: String,
       enum: ["Offline", "Online"],
       default: "Online",
+    },
+    // 线上活动链接
+    link: {
+      type: String,
     },
     // 活动描述
     description: {
@@ -53,6 +56,16 @@ const userSchema = new mongoose.Schema(
       enum: ["Draft", "Published", "Canceled", "Deleted"],
       default: "Draft"
     },
+    // 点赞数
+    like: {
+      type: Number,
+      default: 0,
+    },
+    // 关注数
+    follow: {
+      type: Number,
+      default: 0,
+    },
     config: {
       // 是否允许参与
       canJoin: {
@@ -68,17 +81,12 @@ const userSchema = new mongoose.Schema(
       timezone: {
         type: String,
       },
+      // 最大参与人数
+      max: {
+        type: Number,
+        default: 0
+      },
     },
-    // 点赞数
-    like: {
-      type: Number,
-      default: 0,
-    },
-    // 关注数
-    follow: {
-      type: Number,
-      default: 0,
-    }
   },
   {
     timestamps: {
@@ -92,6 +100,5 @@ const userSchema = new mongoose.Schema(
 userSchema.index({ location: "2dsphere" });
 userSchema.index({ createAt: -1 });
 userSchema.index({ type: -1 });
-userSchema.index({ follow: -1 });
 
 export const eventModel = mongoose.model("user", userSchema);
