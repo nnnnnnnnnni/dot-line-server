@@ -1,8 +1,8 @@
-import { Context } from 'koa';
+import { Context, Next } from 'koa';
 import Router from 'koa-router';
 import { compact, flatten } from 'lodash';
 import { IRoute } from '.';
-import { authMiddleware } from '../middlewares';
+import { authMiddleware, queryValidation } from '../middlewares';
 import { userV1Routes } from './userRoutes';
 
 export const initRoutes = () => {
@@ -37,8 +37,10 @@ export const initRoutes = () => {
   routesWithPrefixAndMethod.map(route => {
     const middlewares = compact([
       route.needLogin ? authMiddleware : null,
+      route.validation ? (ctx: Context, next: Next) => queryValidation(ctx, next, route.validation) : null,
       route.handler
     ]);
+    
     if (route.method === 'get') {
       koaRouter.get(route.path, ...middlewares);
     } else if (route.method === 'post') {

@@ -89,7 +89,8 @@
     "paths": {
       "@controller/*": ["controller/*"],
       "@db/*": ["database/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@router/*": ["router/*"],
     },
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
