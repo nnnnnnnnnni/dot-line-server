@@ -1,4 +1,4 @@
-import { login } from "@controller/user/login";
+import { helloWorld } from "@controller/user/helloWorld";
 import { Context } from "koa";
 import { IRoutes } from ".";
 import Joi from 'joi';
@@ -7,34 +7,10 @@ export const userV1Routes: IRoutes = {
   prefix: '/v1',
   routes: [
     {
-      path: 'users',
+      path: 'hello',
       method: 'get',
-      validation: Joi.object({
-        name: Joi.number().required()
-      }),
-      handler: login
+      validation: Joi.object(),
+      handler: helloWorld
     },
-    {
-      path: 'users',
-      method: 'post',
-      needLogin: true,
-      handler: async (ctx: Context) => {
-        ctx.body = 'Hello post';
-      },
-    },
-    {
-      path: 'users',
-      method: 'put',
-      handler: async (ctx: Context) => {
-        ctx.body = 'Hello put';
-      },
-    },
-    {
-      path: 'users',
-      method: 'delete',
-      handler: async (ctx: Context) => {
-        ctx.body = 'Hello delete';
-      },
-    }
   ]
 }

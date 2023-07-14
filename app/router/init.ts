@@ -4,6 +4,7 @@ import { compact, flatten } from 'lodash';
 import { IRoute } from '.';
 import { authMiddleware, queryValidation } from '../middlewares';
 import { userV1Routes } from './userRoutes';
+import { Response } from '@utils/response';
 
 export const initRoutes = () => {
   const koaRouter = new Router();
@@ -26,13 +27,13 @@ export const initRoutes = () => {
     return routes;
   }))
 
-  const routesWithPrefixAndMethod = [...routesWithPrefix, {
+  const routesWithPrefixAndMethod = routesWithPrefix.concat({
     path: new RegExp('/.*') as any as string,
     method: 'get',
     handler: async (ctx: Context) => {
-      return ctx.body = '404';
+      return ctx.body = new Response(404, 'Not Found', null)
     },
-  } as IRoute]
+  } as IRoute)
 
   routesWithPrefixAndMethod.map(route => {
     const middlewares = compact([

@@ -4,6 +4,5 @@ import Joi from 'joi'
 declare module 'Koa' {
   interface Context extends DefaultContext {
     redis: Redis,
-    validation: Joi.Schema
   }
 }

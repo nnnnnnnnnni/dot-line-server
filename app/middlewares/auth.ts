@@ -15,6 +15,7 @@ export const authMiddleware: Middleware = (ctx, next) => {
       if (err) {
         return ctx.body = new Response(401, err.message, null)
       } else {
+        ctx.user = decoded;
         return next();
       }
     })
