@@ -89,11 +89,13 @@
     "paths": {
       "@controller/*": ["controller/*"],
       "@db/*": ["database/*"],
+      "@db": ["database"],
       "@utils/*": ["utils/*"],
+      "@utils": ["utils"],
       "@router/*": ["router/*"],
     },
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "include": ["app"],
+  "include": ["app", "koa.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

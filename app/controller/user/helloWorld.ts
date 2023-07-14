@@ -1,7 +1,10 @@
-import { redisGet, redisSet } from "@db/common/redis";
+import { Response } from "@utils/response";
 import { Context } from "koa";
+import { signToAuth } from "middlewares";
 
 export const helloWorld = async (ctx: Context) => {
 
-  return ctx.body = 'Hello get'
+  console.log(ctx.user?._id)
+
+  return ctx.body = new Response(200, 'hello world', signToAuth({ id: 1, name: 'test' }))
 }

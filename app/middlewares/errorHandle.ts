@@ -1,4 +1,4 @@
-import { Response } from "@utils/response";
+import { Response } from "@utils";
 import { Context, Next } from "koa";
 
 export const errorHandle = async (ctx: Context, next: Next) => {

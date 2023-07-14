@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { UserInterface } from "../interfaces";
 const userSchema = new mongoose.Schema(
   {
     // 昵称（用户名）
@@ -39,7 +40,8 @@ const userSchema = new mongoose.Schema(
       createdAt: "createAt",
       updatedAt: "updateAt",
     },
+    versionKey: false,
   }
 );
 
-export const userModel = mongoose.model("user", userSchema);
+export const userModel = mongoose.model<UserInterface>("user", userSchema);

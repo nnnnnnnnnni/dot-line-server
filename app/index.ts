@@ -16,6 +16,9 @@ const app = new Koa<any, Context>();
 // 静态文件
 app.use(koaStatic(path.resolve(__dirname, '../public')))
 
+// error handle
+app.use(errorHandle);
+
 // logger
 // app.use(require('koa-pino-logger')())
 
@@ -27,9 +30,6 @@ initRedis().then(instance => {
     redisClient = instance
   }
 })
-
-// error handle
-app.use(errorHandle);
 
 app.use(bodyParser({enableTypes: ['json', 'form', 'text']}))
 

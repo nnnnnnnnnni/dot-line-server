@@ -2,9 +2,9 @@ import { Context, Next } from 'koa';
 import Router from 'koa-router';
 import { compact, flatten } from 'lodash';
 import { IRoute } from '.';
-import { authMiddleware, queryValidation } from '../middlewares';
+import { authMiddleware, explainUserMiddleware, queryValidation } from '../middlewares';
 import { userV1Routes } from './userRoutes';
-import { Response } from '@utils/response';
+import { Response } from '@utils';
 
 export const initRoutes = () => {
   const koaRouter = new Router();
@@ -37,7 +37,7 @@ export const initRoutes = () => {
 
   routesWithPrefixAndMethod.map(route => {
     const middlewares = compact([
-      route.needLogin ? authMiddleware : null,
+      route.needLogin ? authMiddleware : explainUserMiddleware,
       route.validation ? (ctx: Context, next: Next) => queryValidation(ctx, next, route.validation) : null,
       route.handler
     ]);

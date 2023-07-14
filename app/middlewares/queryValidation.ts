@@ -1,6 +1,6 @@
 import { Context, Next } from "koa";
 import Joi from 'joi'
-import { Response } from "@utils/response";
+import { Response } from "@utils";
 
 export const queryValidation = async (ctx: Context, next: Next, validation?: Joi.Schema) => {
   const { query, body } = ctx.request;
